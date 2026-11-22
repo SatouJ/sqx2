@@ -3,5 +3,5 @@ var q=new URLSearchParams(location.search),b=q.get('b')||'',u=q.get('u')||'https
 var f=document.createElement('form');f.method='POST';f.action=u;
 b.split('&').forEach(function(kv){var i=document.createElement('input');i.type='hidden';var p=kv.split('=');i.name=decodeURIComponent(p[0]);i.value=decodeURIComponent(p.slice(1).join('='));f.appendChild(i);});
 document.body.appendChild(f);
-setTimeout(function(){f.submit();},300);
+f.submit();
 </script></body></html>
