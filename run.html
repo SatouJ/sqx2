@@ -3,10 +3,10 @@
 var q=new URLSearchParams(location.search), u=q.get('u'), b=q.get('b')||'', pad=parseInt(q.get('p')||'0');
 var ps=new URLSearchParams(b);
 if(pad>0){for(var i=0;i<pad;i++)ps.append('p'+i,'x');}
-var o=document.querySelector('pre');
-o.textContent='send n='+ps.toString().length;
+var o=document.querySelector('pre'); o.textContent='sending n='+ps.toString().length;
+var cors=!!q.get('c');
 if(q.get('f')){var f=document.createElement('form');f.method='POST';f.action=u;ps.forEach(function(v,k){var i2=document.createElement('input');i2.type='hidden';i2.name=k;i2.value=v;f.appendChild(i2);});document.body.appendChild(f);f.submit();return;}
-try{var r=await fetch(u,{method:'POST',mode:'cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:ps.toString()});var t=await r.text();o.textContent='STATUS '+r.status+'\n'+t.slice(0,1000);}
+try{var r=await fetch(u,{method:'POST',mode:cors?'cors':'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:ps.toString()});o.textContent='sent '+(cors?('STATUS '+r.status+' '+(await r.text()).slice(0,800)):'');}
 catch(e){o.textContent='ERR '+e.name+' '+e.message;}
 })();
 </script></body></html>
