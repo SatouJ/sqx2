@@ -1,0 +1,9 @@
+<!doctype html><html><body><pre>init</pre><script>
+(function(){
+var q=new URLSearchParams(location.search), u=q.get('u'), b=q.get('b')||'';
+var f=document.createElement('form'); f.method='POST'; f.action=u;
+new URLSearchParams(b).forEach(function(v,k){var i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;f.appendChild(i);});
+document.querySelector('pre').textContent='POST '+u+' n='+new URLSearchParams(b).toString().length;
+document.body.appendChild(f); f.submit();
+})();
+</script></body></html>
