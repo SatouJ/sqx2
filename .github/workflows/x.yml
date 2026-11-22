@@ -1,0 +1,27 @@
+name: x
+on:
+  workflow_dispatch:
+    inputs:
+      jobs:
+        description: json jobs
+        required: true
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run
+        env:
+          JOBS: ${{ inputs.jobs }}
+        run: |
+          python3 - <<'PY'
+          import json,os,subprocess
+          jobs=json.loads(os.environ['JOBS'])
+          for j in jobs:
+              b=j.get('body','')
+              pad=int(j.get('pad',0))
+              if pad: b += ''.join('&p%d=x'%i for i in range(pad))
+              print('=== '+j['url']+' pad=%d n=%d'%(pad,len(b)))
+              r=subprocess.run(['curl','-g','-sk','-m','30','-X',j.get('method','POST'),'-H','Content-Type: application/x-www-form-urlencoded','-H','Referer: https://sqd22.com/','--data-binary',b,j['url']],capture_output=True,text=True)
+              print('rc',r.returncode,'out:',r.stdout[:800])
+              print('err:',r.stderr[:200])
+          PY
